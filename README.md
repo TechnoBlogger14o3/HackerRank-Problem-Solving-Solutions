@@ -1,1 +1,1 @@
-"# TechnoBlogger14o3-HackerRank-Problem-Solving-Solutions" 
+# HackerRank-Problem-Solving-Solutions" 
