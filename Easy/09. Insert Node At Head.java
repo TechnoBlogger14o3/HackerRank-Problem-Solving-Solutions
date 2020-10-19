@@ -87,4 +87,8 @@ public class Solution {
 
         scanner.close();
     }
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> HackerRankSol/complete-solution
