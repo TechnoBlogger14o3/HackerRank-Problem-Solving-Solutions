@@ -20,9 +20,11 @@ public class Solution {
 
     static class SinglyLinkedList {
         public SinglyLinkedListNode head;
+        public SinglyLinkedListNode tail;
 
         public SinglyLinkedList() {
             this.head = null;
+            this.tail = null;
         }
       
     }
@@ -39,7 +41,7 @@ public class Solution {
         }
     }
 
-    // Complete the insertNodeAtTail function below.
+    // Complete the insertNodeAtHead function below.
 
     /*
      * For your reference:
@@ -50,20 +52,12 @@ public class Solution {
      * }
      *
      */
-    static SinglyLinkedListNode insertNodeAtTail(SinglyLinkedListNode head, int data) {
+    static SinglyLinkedListNode insertNodeAtHead(SinglyLinkedListNode llist, int data) {
         SinglyLinkedListNode new_node = new SinglyLinkedListNode(data);
-        new_node.next = null;
-        if(head == null) {
-            head = new_node;
-        }
-        else {
-            SinglyLinkedListNode temp = head;
-            while(temp.next != null) {
-                temp = temp.next;
-            }
-            temp.next = new_node;
-        }
-        return head;
+        SinglyLinkedListNode temp = llist;
+        llist = new_node;
+        llist.next = temp;
+        return llist;
     }
 
     private static final Scanner scanner = new Scanner(System.in);
@@ -77,13 +71,11 @@ public class Solution {
         scanner.skip("(\r\n|[\n\r\u2028\u2029\u0085])?");
 
         for (int i = 0; i < llistCount; i++) {
-          
             int llistItem = scanner.nextInt();
             scanner.skip("(\r\n|[\n\r\u2028\u2029\u0085])?");
 
-          SinglyLinkedListNode llist_head = insertNodeAtTail(llist.head, llistItem);
+          SinglyLinkedListNode llist_head = insertNodeAtHead(llist.head, llistItem);
           llist.head = llist_head;
-          
         }
 
 
