@@ -6,7 +6,7 @@ import java.util.*;
 import java.util.concurrent.*;
 import java.util.regex.*;
 
-public class Solution {
+public class Solution4 {
 
     static class SinglyLinkedListNode {
         public int data;
@@ -26,7 +26,18 @@ public class Solution {
             this.head = null;
             this.tail = null;
         }
-      
+
+        public void insertNode(int nodeData) {
+            SinglyLinkedListNode node = new SinglyLinkedListNode(nodeData);
+
+            if (this.head == null) {
+                this.head = node;
+            } else {
+                this.tail.next = node;
+            }
+
+            this.tail = node;
+        }
     }
 
     public static void printSinglyLinkedList(SinglyLinkedListNode node, String sep, BufferedWriter bufferedWriter) throws IOException {
@@ -41,7 +52,7 @@ public class Solution {
         }
     }
 
-    // Complete the insertNodeAtHead function below.
+    // Complete the insertNodeAtPosition function below.
 
     /*
      * For your reference:
@@ -52,12 +63,17 @@ public class Solution {
      * }
      *
      */
-    static SinglyLinkedListNode insertNodeAtHead(SinglyLinkedListNode llist, int data) {
+    static SinglyLinkedListNode insertNodeAtPosition(SinglyLinkedListNode head, int data, int position) {
         SinglyLinkedListNode new_node = new SinglyLinkedListNode(data);
-        SinglyLinkedListNode temp = llist;
-        llist = new_node;
-        llist.next = temp;
-        return llist;
+        int count = 1;
+        SinglyLinkedListNode temp = head;
+        while(count != position) {
+            temp = temp.next;
+            count++;
+        }
+        new_node.next = temp.next;
+        temp.next = new_node;
+        return head;
     }
 
     private static final Scanner scanner = new Scanner(System.in);
@@ -74,21 +90,22 @@ public class Solution {
             int llistItem = scanner.nextInt();
             scanner.skip("(\r\n|[\n\r\u2028\u2029\u0085])?");
 
-          SinglyLinkedListNode llist_head = insertNodeAtHead(llist.head, llistItem);
-          llist.head = llist_head;
+            llist.insertNode(llistItem);
         }
 
+        int data = scanner.nextInt();
+        scanner.skip("(\r\n|[\n\r\u2028\u2029\u0085])?");
 
+        int position = scanner.nextInt();
+        scanner.skip("(\r\n|[\n\r\u2028\u2029\u0085])?");
 
-        printSinglyLinkedList(llist.head, "\n", bufferedWriter);
+        SinglyLinkedListNode llist_head = insertNodeAtPosition(llist.head, data, position);
+
+        printSinglyLinkedList(llist_head, " ", bufferedWriter);
         bufferedWriter.newLine();
 
         bufferedWriter.close();
 
         scanner.close();
     }
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> HackerRankSol/complete-solution

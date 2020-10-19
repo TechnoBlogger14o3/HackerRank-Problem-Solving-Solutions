@@ -26,7 +26,18 @@ public class Solution {
             this.head = null;
             this.tail = null;
         }
-      
+
+        public void insertNode(int nodeData) {
+            SinglyLinkedListNode node = new SinglyLinkedListNode(nodeData);
+
+            if (this.head == null) {
+                this.head = node;
+            } else {
+                this.tail.next = node;
+            }
+
+            this.tail = node;
+        }
     }
 
     public static void printSinglyLinkedList(SinglyLinkedListNode node, String sep, BufferedWriter bufferedWriter) throws IOException {
@@ -41,7 +52,7 @@ public class Solution {
         }
     }
 
-    // Complete the insertNodeAtHead function below.
+    // Complete the deleteNode function below.
 
     /*
      * For your reference:
@@ -52,12 +63,24 @@ public class Solution {
      * }
      *
      */
-    static SinglyLinkedListNode insertNodeAtHead(SinglyLinkedListNode llist, int data) {
-        SinglyLinkedListNode new_node = new SinglyLinkedListNode(data);
-        SinglyLinkedListNode temp = llist;
-        llist = new_node;
-        llist.next = temp;
-        return llist;
+    static SinglyLinkedListNode deleteNode(SinglyLinkedListNode head, int position) {
+        int count = 1;
+        if(position == 0)
+        {
+            head = head.next;
+        }
+        else{
+            SinglyLinkedListNode temp = head;
+            while(count != position) {
+                temp = temp.next;
+                count++;
+            }
+            temp.next = temp.next.next;
+            }
+        if(head == null)
+            return null;
+        else
+            return head;
     }
 
     private static final Scanner scanner = new Scanner(System.in);
@@ -74,21 +97,19 @@ public class Solution {
             int llistItem = scanner.nextInt();
             scanner.skip("(\r\n|[\n\r\u2028\u2029\u0085])?");
 
-          SinglyLinkedListNode llist_head = insertNodeAtHead(llist.head, llistItem);
-          llist.head = llist_head;
+            llist.insertNode(llistItem);
         }
 
+        int position = scanner.nextInt();
+        scanner.skip("(\r\n|[\n\r\u2028\u2029\u0085])?");
 
+        SinglyLinkedListNode llist1 = deleteNode(llist.head, position);
 
-        printSinglyLinkedList(llist.head, "\n", bufferedWriter);
+        printSinglyLinkedList(llist1, " ", bufferedWriter);
         bufferedWriter.newLine();
 
         bufferedWriter.close();
 
         scanner.close();
     }
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> HackerRankSol/complete-solution
